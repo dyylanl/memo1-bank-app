@@ -3,6 +3,8 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.exceptions.DepositNegativeSumException;
 import com.aninfo.exceptions.InsufficientFundsException;
 import com.aninfo.model.Account;
+import com.aninfo.model.Transaction;
+import com.aninfo.service.TransactionService;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -10,14 +12,15 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountOperationsTest extends AccountIntegrationServiceTest {
 
     private Account account;
     private InsufficientFundsException ife;
     private DepositNegativeSumException dnse;
+    private Transaction transaction;
+    private TransactionService transactionService;
 
     @Before
     public void setup() {
@@ -66,6 +69,7 @@ public class AccountOperationsTest extends AccountIntegrationServiceTest {
     public void account_balance_should_remain(int balance) {
         assertEquals(Double.valueOf(balance), account.getBalance());
     }
+
 
     @After
     public void tearDown() {
